@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Gestao_Filmes.Domain\Gestao_Filmes.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
