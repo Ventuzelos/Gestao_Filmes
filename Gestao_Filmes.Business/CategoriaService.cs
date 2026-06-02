@@ -36,6 +36,11 @@ namespace Gestao_Filmes.Business
             return repository.Listar();
         }
 
+        public Categoria ProcurarCategoria(string nome)
+        {
+            return repository.ProcurarPorNome(nome);
+        }
+
         public void RemoverCategoria(int id)
         {
             repository.Remover(id);

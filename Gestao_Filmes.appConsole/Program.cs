@@ -141,12 +141,55 @@ void AdicionarFilme()
         return;
     }
 
+    //-------------Adicionado para o utilizador acrescentar a Cat e Realizador, pois senão dá erro(a cat é obrigatoria) 
+    Console.Write("Categoria: ");
+    string nomeCategoria = Console.ReadLine();
+    //- tinha u problema que se tivesse um erro de escrita, o programa dava erro e tinha que escrever tudo de novo,
+    //adicionado um while pois se erra na cat ou realizador tenho a opção de escrever de novo ou 
+    Categoria categoria = categoriaService.ProcurarCategoria(nomeCategoria);
+
+    while (categoria == null)
+    {
+        Console.WriteLine("Categoria não existe.");
+        Console.Write("Escreva outra categoria ou 0 para cancelar: ");
+        nomeCategoria = Console.ReadLine();
+
+        if (nomeCategoria == "0")
+        {
+            Console.WriteLine("Operação cancelada.");
+            return;
+        }
+
+        categoria = categoriaService.ProcurarCategoria(nomeCategoria);
+    }
+
+    Console.Write("Realizador: ");
+    string nomeRealizador = Console.ReadLine();
+    Realizador realizador = realizadorService.ProcurarRealizador(nomeRealizador);
+
+    while (realizador == null)
+    {
+        Console.WriteLine("Realizador não existe.");
+        Console.Write("Escreva outro realizador ou 0 para cancelar: ");
+        nomeRealizador = Console.ReadLine();
+
+        if (nomeRealizador == "0")
+        {
+            Console.WriteLine("Operação cancelada.");
+            return;
+        }
+
+        realizador = realizadorService.ProcurarRealizador(nomeRealizador);
+    }
+
     Filme filme = new Filme
     {
         Titulo = titulo,
         Ano = ano,
         Lingua = lingua,
-        Classificacao = classificacao
+        Classificacao = classificacao,
+        Categoria = categoria,
+        Realizador = realizador
     };
 
     filmeService.AdicionarFilme(filme);
@@ -166,7 +209,8 @@ void ListarFilmes()
 
     foreach (var filme in filmes)
     {
-        Console.WriteLine($"{filme.Id} - {filme.Titulo} ({filme.Ano}) | {filme.Lingua} | {filme.Classificacao}/5");
+        //Console.WriteLine($"{filme.Id} - {filme.Titulo} ({filme.Ano}) | {filme.Lingua} | {filme.Classificacao}/5");
+        Console.WriteLine($"{filme.Id} - {filme.Titulo} ({filme.Ano}) | {filme.Lingua} | {filme.Classificacao}/5 | Categoria: {filme.Categoria.Nome} | Realizador: {filme.Realizador.Nome}");
     }
 }
 
@@ -183,7 +227,8 @@ void ProcurarFilme()
         return;
     }
 
-    Console.WriteLine($"{filme.Id} - {filme.Titulo} ({filme.Ano}) | {filme.Lingua} | {filme.Classificacao}/5");
+    //Console.WriteLine($"{filme.Id} - {filme.Titulo} ({filme.Ano}) | {filme.Lingua} | {filme.Classificacao}/5");
+    Console.WriteLine($"{filme.Id} - {filme.Titulo} ({filme.Ano}) | {filme.Lingua} | {filme.Classificacao}/5 | Categoria: {filme.Categoria.Nome} | Realizador: {filme.Realizador.Nome}");
 }
 
 void AtualizarFilme()

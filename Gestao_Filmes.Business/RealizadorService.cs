@@ -35,6 +35,11 @@ namespace Gestao_Filmes.Business
             return repository.Listar();
         }
 
+        public Realizador ProcurarRealizador(string nome)
+        {
+            return repository.ProcurarPorNome(nome);
+        }
+
         public void RemoverRealizador(int id)
         {
             repository.Remover(id);
