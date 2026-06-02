@@ -5,6 +5,12 @@ using Gestao_Filmes.Domain;
 var repository = new FilmeRepositoryMemoria();
 var filmeService = new FilmeService(repository);
 
+var categoriaRepository = new CategoriaRepository();
+var categoriaService = new CategoriaService(categoriaRepository);
+
+var realizadorRepository = new RealizadorRepository();
+var realizadorService = new RealizadorService(realizadorRepository);
+
 int opcao;
 
 do
@@ -22,10 +28,15 @@ do
     Console.WriteLine("3 - Procurar filme");
     Console.WriteLine("4 - Atualizar filme");
     Console.WriteLine("5 - Remover filme");
+    Console.WriteLine("6 - Adicionar categoria");
+    Console.WriteLine("7 - Listar categorias");
+    Console.WriteLine("8 - Remover categoria");
+    Console.WriteLine("9 - Adicionar realizador");
+    Console.WriteLine("10 - Listar realizadores");
+    Console.WriteLine("11 - Remover realizador");
     Console.WriteLine("0 - Sair");
 
     Console.ResetColor();
-
     Console.WriteLine("---------------------------------");
     Console.Write("");
     Console.Write("Escolha uma opção: ");
@@ -55,6 +66,30 @@ do
 
             case 5:
                 RemoverFilme();
+                break;
+
+            case 6:
+                AdicionarCategoria();
+                break;
+
+            case 7:
+                ListarCategorias();
+                break;
+
+            case 8:
+                RemoverCategoria();
+                break;
+
+            case 9:
+                AdicionarRealizador();
+                break;
+
+            case 10:
+                ListarRealizadores();
+                break;
+
+            case 11:
+                RemoverRealizador();
                 break;
 
             case 0:
@@ -168,6 +203,81 @@ void AtualizarFilme()
     filmeService.AtualizarFilme(filme);
 
     Console.WriteLine("Filme atualizado com sucesso.");
+}
+
+void AdicionarCategoria()
+{
+    Console.Write("Nome da categoria: ");
+    string nome = Console.ReadLine();
+
+    categoriaService.AdicionarCategoria(nome);
+
+    Console.WriteLine("Categoria adicionada com sucesso.");
+}
+
+void ListarCategorias()
+{
+    var categorias = categoriaService.ListarCategorias();
+
+    if (categorias.Count == 0)
+    {
+        Console.WriteLine("Não existem categorias registadas.");
+        return;
+    }
+
+    foreach (var categoria in categorias)
+    {
+        Console.WriteLine($"{categoria.Id} - {categoria.Nome}");
+    }
+}
+
+void RemoverCategoria()
+{
+    Console.Write("Id da categoria a remover: ");
+    int id = int.Parse(Console.ReadLine());
+
+    categoriaService.RemoverCategoria(id);
+
+    Console.WriteLine("Categoria removida com sucesso.");
+}
+
+void AdicionarRealizador()
+{
+    Console.Write("Nome do realizador: ");
+    string nome = Console.ReadLine();
+
+    Console.Write("País do realizador: ");
+    string pais = Console.ReadLine();
+
+    realizadorService.AdicionarRealizador(nome, pais);
+
+    Console.WriteLine("Realizador adicionado com sucesso.");
+}
+
+void ListarRealizadores()
+{
+    var realizadores = realizadorService.ListarRealizadores();
+
+    if (realizadores.Count == 0)
+    {
+        Console.WriteLine("Não existem realizadores registados.");
+        return;
+    }
+
+    foreach (var realizador in realizadores)
+    {
+        Console.WriteLine($"{realizador.Id} - {realizador.Nome} | {realizador.Pais}");
+    }
+}
+
+void RemoverRealizador()
+{
+    Console.Write("Id do realizador a remover: ");
+    int id = int.Parse(Console.ReadLine());
+
+    realizadorService.RemoverRealizador(id);
+
+    Console.WriteLine("Realizador removido com sucesso.");
 }
 
 void RemoverFilme()
