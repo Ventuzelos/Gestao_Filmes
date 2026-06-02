@@ -3,13 +3,22 @@ using Gestao_Filmes.Data;
 using Gestao_Filmes.Domain;
 
 var repository = new FilmeRepositoryMemoria();
-var filmeService = new FilmeService(repository);
 
 var categoriaRepository = new CategoriaRepository();
+var realizadorRepository = new RealizadorRepository();
+
+//var filmeService = new FilmeService(repository); -- da erro tive que substituir por:
+
+var filmeService = new FilmeService(
+    repository,
+    categoriaRepository,
+    realizadorRepository);
+
 var categoriaService = new CategoriaService(categoriaRepository);
 
-var realizadorRepository = new RealizadorRepository();
 var realizadorService = new RealizadorService(realizadorRepository);
+
+
 
 int opcao;
 

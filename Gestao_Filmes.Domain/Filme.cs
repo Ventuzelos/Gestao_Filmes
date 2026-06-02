@@ -15,5 +15,9 @@ namespace Gestao_Filmes.Domain
         public string Lingua { get; set; }
 
         public decimal Classificacao { get; set; }
+
+        //--------------- Parte 3:
+        public Categoria Categoria { get; set; }
+        public Realizador Realizador { get; set; }
     }
 }
