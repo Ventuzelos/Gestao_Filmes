@@ -2,10 +2,11 @@
 using Gestao_Filmes.Data;
 using Gestao_Filmes.Domain;
 
+
 var repository = new FilmeRepositoryMemoria();
 
-var categoriaRepository = new CategoriaRepository();
-var realizadorRepository = new RealizadorRepository();
+var categoriaRepository = new CategoriaSQLiteRepository();
+var realizadorRepository = new RealizadorSQLiteRepository();
 
 //var filmeService = new FilmeService(repository); -- da erro tive que substituir por:
 
