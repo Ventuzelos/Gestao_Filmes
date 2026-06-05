@@ -45,6 +45,10 @@ do
     Console.WriteLine("9 - Adicionar realizador");
     Console.WriteLine("10 - Listar realizadores");
     Console.WriteLine("11 - Remover realizador");
+    Console.WriteLine("12 - Total de filmes");
+    Console.WriteLine("13 - Listar filmes por categoria");
+    Console.WriteLine("14 - Listar filmes por realizador");
+    Console.WriteLine("15 - Filme melhor classificado");
     Console.WriteLine("0 - Sair");
 
     Console.ResetColor();
@@ -101,6 +105,22 @@ do
 
             case 11:
                 RemoverRealizador();
+                break;
+
+            case 12:
+                TotalFilmes();
+                break;
+
+            case 13:
+                ListarFilmesPorCategoria();
+                break;
+
+            case 14:
+                ListarFilmesPorRealizador();
+                break;
+
+            case 15:
+                MelhorFilme();
                 break;
 
             case 0:
@@ -344,4 +364,66 @@ void RemoverFilme()
     filmeService.RemoverFilme(titulo);
 
     Console.WriteLine("Filme removido com sucesso.");
+}
+
+void TotalFilmes()
+{
+    var filmes = filmeService.ListarFilmes();
+
+    Console.WriteLine($"Total de filmes registados: {filmes.Count}");
+}
+
+void ListarFilmesPorCategoria()
+{
+    Console.Write("Nome da categoria: ");
+    string nomeCategoria = Console.ReadLine();
+
+    var filmes = filmeService.ListarFilmes();
+
+    foreach (var filme in filmes)
+    {
+        if (filme.Categoria.Nome == nomeCategoria)
+        {
+            Console.WriteLine($"{filme.Id} - {filme.Titulo} ({filme.Ano}) | {filme.Classificacao}/5 | Realizador: {filme.Realizador.Nome}");
+        }
+    }
+}
+
+void ListarFilmesPorRealizador()
+{
+    Console.Write("Nome do realizador: ");
+    string nome = Console.ReadLine();
+
+    var filmes = filmeService.ListarFilmes();
+
+    foreach (var filme in filmes)
+    {
+        if (filme.Realizador.Nome.Equals(nome, StringComparison.OrdinalIgnoreCase))
+        {
+            Console.WriteLine($"{filme.Titulo} ({filme.Ano})");
+        }
+    }
+}
+
+void MelhorFilme()
+{
+    var filmes = filmeService.ListarFilmes();
+
+    if (filmes.Count == 0)
+    {
+        Console.WriteLine("Não existem filmes.");
+        return;
+    }
+
+    Filme melhor = filmes[0];
+
+    foreach (var filme in filmes)
+    {
+        if (filme.Classificacao > melhor.Classificacao)
+        {
+            melhor = filme;
+        }
+    }
+
+    Console.WriteLine($"Melhor filme: {melhor.Titulo} ({melhor.Classificacao}/5)");
 }

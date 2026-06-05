@@ -1,78 +1,105 @@
-#Gestão de Filmes
+# Gestão de Filmes
 
 Projeto desenvolvido em C# utilizando arquitetura em camadas.
 
 ## Objetivo
 
-Desenvolver uma aplicação de gestão de filmes aplicando:
+Criar uma aplicação para gestão de filmes utilizando:
 
-- Arquitetura em Camadas
-- Interfaces
-- Regras de negócio
-- Persistência de Dados
-- Git e GitHub
-
+Arquitetura em Camadas
+Interfaces
+Regras de Negócio
+Persistência de Dados
+Git e GitHub
 ---
 
 # Estrutura do Projeto
+O projeto está dividido em 4 camadas:
 
-A solução encontra-se dividida em 4 camadas:
+### UI (Gestao_Filmes.AppConsole)
+Responsável pela interação com o utilizador.
 
-## UI (Gestao_Filmes.appConsole)
+### Business (Gestao_Filmes.Business)
+Responsável pelas validações e regras de negócio.
 
-Responsável pela interação com o utilizador através da consola.
+### Data (Gestao_Filmes.Data)
+Responsável pela persistência dos dados.
 
-## Business (Gestao_Filmes.Business)
+### Domain (Gestao_Filmes.Domain)
+Responsável pelas entidades e interfaces.
+---
 
-Responsável pelas regras de negócio e validações.
+# Entidades
+## Filme
+Id
+Título
+Ano
+Língua
+Classificação
+Categoria
+Realizador
 
-## Data (Gestao_Filmes.Data)
+## Categoria
+Id
+Nome
 
-Responsável pela persistência de dados em memória.
+## Realizador
+Id
+Nome
+País
+---
 
-## Domain (Gestao_Filmes.Domain)
+# Funcionalidades
+### Filmes
+Adicionar filme
+Listar filmes
+Procurar filme
+Atualizar classificação
+Remover filme
 
-Responsável pelas entidades e interfaces do sistema.
+### Categorias
+Adicionar categoria
+Listar categorias
+Remover categoria
+
+### Realizadores
+Adicionar realizador
+Listar realizadores
+Remover realizador
+---
+
+# Regras de Negócio
+### Filme
+O título é obrigatório
+Não permite filmes com o mesmo título
+A classificação tem de estar entre 0 e 5
+
+### Categoria
+O nome é obrigatório
+Não permite categorias repetidas
+
+### Realizador
+O nome é obrigatório
+O país é obrigatório
+Não permite realizadores repetidos
+---
+
+# Persistência de Dados
+Durante o desenvolvimento foi utilizada persistência em memória através de listas.
+Na parte final do projeto foi implementada persistência em SQLite, permitindo guardar os dados mesmo após fechar a aplicação.
+---
+
+# Funcionalidades Extra
+* Mostrar total de filmes
+* Listar filmes por categoria
+* Listar filmes por realizador
+* Mostrar o filme com melhor classificação
 
 ---
 
-# Funcionalidades Implementadas (Parte 1)
+# Tecnologias Utilizadas
 
-## Gestão de Filmes
-
-- Adicionar filme
-- Listar filmes
-- Procurar filme por título
-- Remover filme
-
----
-
-# Entidade Filme
-
-Cada filme possui:
-
-- Id
-- Título
-- Ano
-- Língua
-- Classificação
-
----
-
-# Regras de negócio
-
-## Título
-- obrigatório
-- não permite duplicados
-
-## Classificação
-- deve estar entre 0 e 5
-- possibilidade e números decimais
-
----
-
-# Persistência
-
-Nesta primeira fase o sistema utiliza persistência em memória através de:
-C#
-List<Filme>
+* C#
+* SQLite
+* Git
+* GitHub
