@@ -3,7 +3,8 @@ using Gestao_Filmes.Data;
 using Gestao_Filmes.Domain;
 
 
-var repository = new FilmeRepositoryMemoria();
+//var repository = new FilmeRepositoryMemoria(); ---elimiado pelo SQLite
+var repository = new FilmeSQLiteRepository();
 
 var categoriaRepository = new CategoriaSQLiteRepository();
 var realizadorRepository = new RealizadorSQLiteRepository();

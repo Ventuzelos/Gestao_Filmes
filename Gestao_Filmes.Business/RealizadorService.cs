@@ -23,6 +23,16 @@ namespace Gestao_Filmes.Business
                 throw new Exception("País obrigatório.");
             }
 
+
+            //estava a criar 2 realizadores iguais por isso tive que add uma maneira de tratar  erro.
+            Realizador realizadorExistente = repository.ProcurarPorNome(nome);
+
+            if (realizadorExistente != null)
+            {
+                throw new Exception("Já existe um realizador com esse nome.");
+            }
+
+
             Realizador realizador = new Realizador();
             realizador.Nome = nome;
             realizador.Pais = pais;
